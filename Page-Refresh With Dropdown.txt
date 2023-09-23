@@ -1,0 +1,45 @@
+<template>
+  <div>
+    <b>Refresh Time Interval</b>: &nbsp;
+    <select v-model="refreshInterval">
+      <option v-for="interval in refreshIntervals" :key="interval" :value="interval">{{ interval }} Minute </option>
+    </select>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "HelloWorld",
+  data() {
+    return {
+      refreshIntervals: [1, 2, 3, 4],
+      refreshInterval: localStorage.getItem('interval') === null ? 1 : localStorage.getItem('interval'),
+      intervalId: null,
+      flag: localStorage.getItem('flag'),
+    };
+  },
+  created() {
+    // if (this.flag && this.refreshInterval > 0) {
+      localStorage.setItem('interval',this.refreshInterval)
+      this.intervalId = setInterval(this.updateRefreshInterval, localStorage.getItem('interval') * 1000 * 10); // Every 1000 milliseconds (1 second)
+      this.updateRefreshInterval();
+      console.log("Page Reloading");
+    // }
+  },
+  watch: {
+    refreshInterval(newValue) {
+      localStorage.setItem('flag',true)
+      clearInterval(this.intervalId)
+      localStorage.setItem('interval', newValue)
+      this.updateRefreshInterval(newValue)
+    },
+  },
+  methods: {
+    updateRefreshInterval() {
+      clearInterval(this.intervalId);
+      this.intervalId = setInterval(this.updateRefreshInterval, localStorage.getItem('interval') * 1000 * 10); // Every 1000 milliseconds (1 second)
+      console.log("Page Reloading");
+    },
+  },
+};
+</script>
