@@ -1,0 +1,42 @@
+Imp Points:
++++++++++++++
+
+
+-X specifies the request method (POST, PUT, DELETE).
+-H sets the request header.
+-d sends data in the request body
+
+Ignore if you do not want to set auth token: -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+
+
+GET API:
+========
+curl -H "Content-Type: application/json" -H "Authorization: Bearer YOUR_ACCESS_TOKEN" https://api.example.com/resource
+
+
+POST APi:
+=========
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -d '{"key1":"value1","key2":"value2"}' https://api.example.com/resource
+
+
+PUT API:
+========
+curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -d '{"key1":"newvalue1","key2":"newvalue2"}' https://api.example.com/resource/123
+
+
+DELETE API:
+===========
+curl -X DELETE -H "Authorization: Bearer YOUR_ACCESS_TOKEN" https://api.example.com/resource/123
+
+
+
+
+To set your custom header:
+===========================
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -H "Custom-Header: Custom-Value" https://api.example.com/resource
+
+Same for POST, PUT and DELETE: -H "Custom-Header: Custom-Value"
+
+
+
+

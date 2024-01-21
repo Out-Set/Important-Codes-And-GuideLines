@@ -10,4 +10,10 @@ Command: java -jar -Dserver.port=your_port your-application.war
 i.e. java -jar -Dserver.port=8080 demoApplication.war
 
 
+Connect to server, through Linux System:
+=========================================
+ssh username@remote_server_ip
+
+
+
 
