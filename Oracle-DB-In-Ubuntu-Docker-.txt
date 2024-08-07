@@ -20,22 +20,47 @@ Setup Oracle DB in Docker
 7. $ docker volume create oracle-db //created volume named 'oracle-db'
 
 8. Create Container
-   $ docker run -d --name <name> -p 1521:1521 -p 5500:5500 -e ORACLE_SID=ORCLCDB -e ORACLE_PDB=ORCLPDB1 -e ORACLE_PWD=<password> -v <volume>:/opt/oracle/ordata <image-name>:tag<>
+   $ docker run -d --name <name> -p 1521:1521 -p 5500:5500 -e ORACLE_SID=ORCLDB -e ORACLE_PDB=ORCLPDB1 -e ORACLE_PWD=<password> -v <volume>:/opt/oracle/ordata <image-name>:tag<>
    $ docker run -d --name oracledb -p 1521:1521 -p 5500:5500 -e ORACLE_SID=ORCLCDB -e ORACLE_PDB=ORCLPDB1 -e ORACLE_PWD=12345 -v oracle-db:/opt/oracle/ordata oracle/database:19.3.0-ee
+   
+# Create Oracle-Container: Another example
+------------------------------------------
+docker run -d --name oracleDb \
+-p 1521:1521 -p 5500:5500 \
+-e ORACLE_SID=ORCLDB \
+-e ORACLE_PDB=ORCLPDB1 \
+-e ORACLE_PWD=Db@12345$ \
+-v oracle-db:/opt/oracle/oradata \
+oracle/database:19.3.0-ee
+
 
 9. $ docker logs -f <some part of the displayed code> 
      i.e. 
      $ docker logs -f 7200b294038920
-   
-   
+  
 10. $ docker images // To see all the created images
 
 11. $ docker ps -a // To see all the existing containers (running or not running both)
 
 12. $ docker ps // To see all the running containers
 
+13. Connecting to the Database from Within the Container:
+------------------------------------------------------
+
+$ docker exec -it dbname sqlplus / as sysdba
+
+$ docker exec -it dbname sqlplus sys/cdb-user-password@cdb-sid as sysdba
+
+$ docker exec -it dbname sqlplus system/cdb-user-password@cdb-sid
+
+$ docker exec -it dbname sqlplus pdbadmin/pdb-user-password@pdbname
+
 ==============================================================================================================================================================================================
 
+
+Oracle SQL-Developer in VS-Code:
+---------------------------------
+Vs-Code - Oracle SQL Developer Extension for VSCode
 
 
 Setup SQL-Developer in Ubuntu

@@ -1,0 +1,11 @@
+GNOME Software (formerly Software Install):
+--------------------------------------------
+$ sudo apt-get install ubuntu-gnome-desktop
+Right-click on the .deb file and select “Software Install” (available if you have GNOME Software installed).
+Alternatively, open GNOME Software, navigate to the “Install” tab, and click “Add a .deb file” to install the package.
+
+
+
+Start Camera:
+-------------
+systemctl --user restart pipewire

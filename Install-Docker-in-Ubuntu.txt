@@ -1,0 +1,100 @@
+Official Link: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+
+Install using the apt repository:
+----------------------------------
+Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker repository. 
+Afterward, you can install and update Docker from the repository.
+
+1.Set up Docker's apt repository:
+--------------------------------
+# Add Docker's official GPG key:
+ sudo apt-get update
+ sudo apt-get install ca-certificates curl
+ sudo install -m 0755 -d /etc/apt/keyrings
+ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+ sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  
+sudo apt-get update
+
+
+2.Install the Docker packages:
+-------------------------------
+Latest Specific version: To install the latest version, run:
+ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+3.Verify that the Docker Engine installation is successful by running the hello-world image:
+---------------------------------------------------------------------------------------------
+ sudo docker run hello-world
+
+Note: Run each docker commands with sudo:
+------------------------------------------
+i.e. sudo docker ps -a
+     sudo docker images
+     sudo docker logs <image-name>
+     .....
+     .....
+     
+     
+     
+Note: Get rid from sudo:
+------------------------
+# Replace your-username with your actual username.
+
+1.Run the following command to confirm that your user has been added to the Docker group:
+	$ groups your-username
+
+2.Create the Docker group (if it doesn't already exist):
+	$ sudo groupadd docker
+	
+3.Add your user to the Docker group:
+	$ sudo usermod -aG docker your-username
+	
+4.Restart the Docker service:
+	$ sudo systemctl restart docker
+
+5.Reboot your system: Sometimes changes to group memberships do not take effect until you log out and log back in or reboot the system:
+	$ sudo reboot
+     
+     
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Install from a package:
+------------------------
+If you can't use Docker's apt repository to install Docker Engine, you can download the deb file for your release and install it manually. 
+You need to download a new file each time you want to upgrade Docker Engine.
+
+1.Go to https://download.docker.com/linux/ubuntu/dists/.
+
+2.Select your Ubuntu version in the list.
+
+3.Go to pool/stable/ and select the applicable architecture (amd64, armhf, arm64, or s390x).
+
+4.Download the following deb files for the Docker Engine, CLI, containerd, and Docker Compose packages:
+ containerd.io_<version>_<arch>.deb
+ docker-ce_<version>_<arch>.deb
+ docker-ce-cli_<version>_<arch>.deb
+ docker-buildx-plugin_<version>_<arch>.deb
+ docker-compose-plugin_<version>_<arch>.deb
+
+5.Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
+ sudo dpkg -i ./containerd.io_<version>_<arch>.deb \
+  ./docker-ce_<version>_<arch>.deb \
+  ./docker-ce-cli_<version>_<arch>.deb \
+  ./docker-buildx-plugin_<version>_<arch>.deb \
+  ./docker-compose-plugin_<version>_<arch>.deb
+  
+The Docker daemon starts automatically.
+
+6.Verify that the Docker Engine installation is successful by running the hello-world image.
+ sudo service docker start
+ sudo docker run hello-world
+This command downloads a test image and runs it in a container. When the container runs, it prints a confirmation message and exits.
+
+You have now successfully installed and started Docker Engine.
