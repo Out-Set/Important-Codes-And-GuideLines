@@ -1,0 +1,38 @@
+=========================================
+Uninstall and Remove an App and its files
+=========================================
+
+Method 1: Using the Terminal:
++++++++++++++++++++++++++++++
+
+1.Remove App: $ sudo apt remove <app-name>
+	i.e. sudo apt remove zoom
+	
+2.Purge Configuration Files:
+	To remove any residual configuration files, use the purge command
+	$ sudo apt purge <app-name>
+		i.e. sudo apt purge zoom
+	
+3.Remove Unused Dependencies:
+	Clean up any dependencies that are no longer needed
+	$ sudo apt autoremove
+	
+4.Remove Zoom Configuration Files and Directories:
+	Optionally, you can manually delete any remaining Zoom configuration files and directories
+	$ rm -rf ~/.<app-dir-name>
+		i.e. $ rm -rf ~/.zoom
+		
+----------------------------------------------------------------------------------------------------------------------
+
+Method 2: Using the Ubuntu Software Center
+++++++++++++++++++++++++++++++++++++++++++
+
+1.Open the Ubuntu Software Center: Search for "Ubuntu Software" in your applications menu and open it.
+
+2.Search for Zoom: Use the search bar to find the App
+
+3.Uninstall Zoom: Click on App in the search results, then click the "Remove" button.
+
+4.Purge Residual Files (Optional): Even after uninstalling via the Software Center, you may want to remove any remaining configuration files using the terminal:
+	$ sudo apt purge <app-name>
+	$ rm -rf ~/.<app-dir-name>
