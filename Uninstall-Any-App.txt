@@ -36,3 +36,26 @@ Method 2: Using the Ubuntu Software Center
 4.Purge Residual Files (Optional): Even after uninstalling via the Software Center, you may want to remove any remaining configuration files using the terminal:
 	$ sudo apt purge <app-name>
 	$ rm -rf ~/.<app-dir-name>
+	
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrading the Packages:
++++++++++++++++++++++++
+
+Step 1: Update the Package List
+	First, ensure your package list is up-to-date:
+	$ sudo apt update
+	
+Step 2: Upgrade the Packages
+	To upgrade the packages that were not upgraded automatically, you can run:
+	$ sudo apt upgrade
+	
+Step 3: Upgrade Specific Packages (if needed)
+	If sudo apt upgrade doesn't upgrade the two packages, you can try upgrading them specifically by running:
+	$ sudo apt list --upgradable
+	This command will list the packages that are available for upgrade. Then you can upgrade them by specifying their names:
+	$ sudo apt install <package-name>
+	
+Step 4: Full Upgrade (Optional)
+	If the packages still aren't upgrading, you can run a full upgrade, which attempts to upgrade all packages, including those that might have dependency changes:
+	$ sudo apt full-upgrade
