@@ -27,7 +27,7 @@ Ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 	For http protocol:
 	------------------
 	1.Create a elasticsearch.yml file with followings lines
-        _______________________________________________________________________________________
+        	_______________________________________________________________________________________
 		# Elasticsearch Props for localhost
 		xpack.security.enabled: false
 		xpack.security.enrollment.enabled: false  # Disable enrollment if not using security

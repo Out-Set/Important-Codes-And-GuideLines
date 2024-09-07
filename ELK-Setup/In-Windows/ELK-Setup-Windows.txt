@@ -8,8 +8,8 @@ Elasticsearch config for Localhost:
 
 2. Under elasticsearch-x.y.z/config/
 ------------------------------------
-Maintain Configs in file: elasticsearch.yml
-
+Maintain Configs in file: elasticsearch.yml, and write the followings lines according to your requirements
+____________________________________________________
 xpack.security.enabled: false
 
 xpack.security.enrollment.enabled: true
@@ -26,6 +26,7 @@ xpack.security.transport.ssl:
 cluster.initial_master_nodes: ["DESKTOP-C3CBJVK"]
 
 http.host: 0.0.0.0
+-----------------------------------------------------
 
 3. Under elasticsearch-x.y.z/bin/
 ----------------------------------
@@ -35,14 +36,14 @@ Open cmd and Start batch file: .\elasticsearch.bat
 ----------------------------
 Goto: http://localhost:9200/
 
-----------------------------------------------------------------------------------------------------------------
+=================================================================================================================================================
 
 Logstash:
 =========
 1. Under the logstash-x.y.z\config
 -----------------------------------
 Create a file: logstash.config, and write the followings lines according to your requirements
-
+_____________________________________________________________________________________________________
 input {
     file {
 		path => "C:/Users/hp/Downloads/Intg-War-With-Dash/logs/bitsflow-int-web.log"
@@ -63,6 +64,7 @@ output {
     data_stream_namespace => "default"  # You can change this to suit your needs
   }
 }
+--------------------------------------------------------------------------------------------------------
 
 
 #Note for Logstash.conf: start_position Options:
@@ -99,15 +101,17 @@ Open cmd and run: .\logstash.bat -f .\config\logstash.conf
 Goto: http://localhost:9600/
 
 
----------------------------------------------------------------------------------------------------------------------
+=================================================================================================================================================
 
 Kibana:
 =======
 
 1. Under kibana-x.y.z\config:
 -----------------------------
-Uncomment the line from kibana.yml file: elasticsearch.hosts: ["http://localhost:9200"]
-
+Uncomment the below line from kibana.yml file: 
+_________________________________________________
+elasticsearch.hosts: ["http://localhost:9200"]
+-------------------------------------------------
 Note: You can do the others configs by uncommenting the lines ...... if required.....
 elasticsearch.username: "kibana_admin"
 elasticsearch.password: "admin"
