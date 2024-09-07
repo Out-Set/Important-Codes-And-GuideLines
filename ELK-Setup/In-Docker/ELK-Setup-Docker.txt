@@ -22,7 +22,7 @@ Ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 	   docker.elastic.co/elasticsearch/elasticsearch:8.15.1
 	   
 		example: docker run -d --name elasticsearch --net elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" 
-				 docker.elastic.co/elasticsearch/elasticsearch:8.15.1
+			 docker.elastic.co/elasticsearch/elasticsearch:8.15.1
    
 	For http protocol:
 	------------------
@@ -45,8 +45,8 @@ Ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 		-v path/to/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml docker.elastic.co/elasticsearch/elasticsearch:8.15.1
 		
 			example: docker run -d --name elasticsearch --net elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" 
-					 -v C:/Users/hp/Documents/ELK-in-Docker/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml 
-					 docker.elastic.co/elasticsearch/elasticsearch:8.15.1
+				 -v C:/Users/hp/Documents/ELK-in-Docker/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml 
+				 docker.elastic.co/elasticsearch/elasticsearch:8.15.1
 
 4.Verify Elasticsearch:
 -----------------------
@@ -71,7 +71,7 @@ Ref: https://www.elastic.co/guide/en/logstash/current/docker.html
 		----------------------------------------------------------------
 		
 	2.Create a logstash.conf file with followings lines
-		__________________________________________________________________________________________________________________
+		___________________________________________________________________________________________________________________________
 		input {
 			file {
 				path => "/logs/bitsflow-int-web.log"  # Updated to match the mounted path inside the container
@@ -91,7 +91,7 @@ Ref: https://www.elastic.co/guide/en/logstash/current/docker.html
 				data_stream_namespace => "default"
 			}
 		}
-		---------------------------------------------------------------------------------------------------------------------
+		-----------------------------------------------------------------------------------------------------------------------------
 	
 	3.Attach these files with following Container-creation command, including your application log file too.
 		docker run --name logstash --net elastic 
@@ -103,12 +103,12 @@ Ref: https://www.elastic.co/guide/en/logstash/current/docker.html
 		-d docker.elastic.co/logstash/logstash:8.15.1
 
 		example: docker run --name logstash --net elastic 
-				 -v C:/Users/hp/Documents/ELK-in-Docker/logstash.conf:/usr/share/logstash/pipeline/logstash.conf 
-				 -v "C:/Users/hp/Downloads/Intg-War-With-Dash/logs:/logs" 
-				 -v C:/Users/hp/Documents/ELK-in-Docker/logstash.yml:/usr/share/logstash/config/logstash.yml 
-				 -p 5044:5044 
-				 -p 9600:9600 
-				 -d docker.elastic.co/logstash/logstash:8.15.1
+			 -v C:/Users/hp/Documents/ELK-in-Docker/logstash.conf:/usr/share/logstash/pipeline/logstash.conf 
+			 -v "C:/Users/hp/Downloads/Intg-War-With-Dash/logs:/logs" 
+			 -v C:/Users/hp/Documents/ELK-in-Docker/logstash.yml:/usr/share/logstash/config/logstash.yml 
+			 -p 5044:5044 
+			 -p 9600:9600 
+			 -d docker.elastic.co/logstash/logstash:8.15.1
 
 4.Verify Logstash:
 ------------------
@@ -167,8 +167,8 @@ Note: Ignore the 1st step if already done in Elasticsearch
 		-p 5601:5601 -d docker.elastic.co/kibana/kibana:8.15.1
 		
 		example: docker run --name kibana --net elastic 
-				 -v C:/Users/hp/Documents/ELK-in-Docker/kibana.yml:/usr/share/kibana/config/kibana.yml 
-				 -p 5601:5601 -d docker.elastic.co/kibana/kibana:8.15.1
+			 -v C:/Users/hp/Documents/ELK-in-Docker/kibana.yml:/usr/share/kibana/config/kibana.yml 
+			 -p 5601:5601 -d docker.elastic.co/kibana/kibana:8.15.1
 
 4.Access the kibana-dash:
 -------------------------
@@ -178,11 +178,12 @@ Goto: http://localhost:5601/
 5.On Kibana-Dashboard:
 ----------------------
 	|-> Management -> Stack Management 
-	|					|-> Kibana -> Data Views -> Create data view
-    |                                                   |
-	|													|-> Name (Give it a name)
-	|													|-> Index pattern ( View from the right side & choose one which all showing as 'Data stream' )
-	|													|                      Copy (one as 'Data stream') and paste into Index pattern
-	|													|-> Click 'Save data view to kibana'
+	|			|-> Kibana -> Data Views -> Create data view
+    	|                                                   	|
+	|						    	|-> Name (Give it a name)
+	|						    	|-> Index pattern ( View from the right side & choose one which all showing as 'Data stream' )
+	|							|                      Copy (one as 'Data stream') and paste into Index pattern
+	|							|
+	|							|-> Click 'Save data view to kibana'
 	|
 	|-> Analytics -> Discover

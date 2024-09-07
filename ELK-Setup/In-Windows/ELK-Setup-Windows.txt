@@ -65,20 +65,28 @@ output {
 }
 
 
-#Note:
-#start_position Options:
-#beginning:
-	#Description: When start_position is set to "beginning", Logstash starts reading the log file from the very first line. This is useful when you want to ensure that all log entries are processed from the start of the file.
-	#Use Case:
-		#When processing a new log file for the first time.
-		#When you want to reprocess all logs after a pipeline restart or configuration change.
-		#Ideal for development, testing, or when the log data is historical, and you want to process everything from scratch.
+#Note for Logstash.conf: start_position Options:
+beginning:
+----------
+	Description: 
+		-> When start_position is set to "beginning", Logstash starts reading the log file from the very first line. 
+		-> This is useful when you want to ensure that all log entries are processed from the start of the file.
+		
+	Use Case:
+		-> When processing a new log file for the first time.
+		-> When you want to reprocess all logs after a pipeline restart or configuration change.
+		-> Ideal for development, testing, or when the log data is historical, and you want to process everything from scratch.
 
-#end:
-	#Description: When start_position is set to "end", Logstash begins reading from the end of the file. It means Logstash will only process new log entries that are appended after it starts running. This option is helpful for tailing live log files.
-	#Use Case:
-		#Useful for monitoring and processing real-time logs (like system logs or application logs).
-		#Prevents Logstash from processing older log entries that were already handled or are not relevant.
+end:
+----
+	Description: 
+		-> When start_position is set to "end", Logstash begins reading from the end of the file. 
+		-> It means Logstash will only process new log entries that are appended after it starts running. 
+		-> This option is helpful for tailing live log files.
+		
+	Use Case:
+		-> Useful for monitoring and processing real-time logs (like system logs or application logs).
+		-> Prevents Logstash from processing older log entries that were already handled or are not relevant.
 	
 
 2. Under logstash-x.y.z\bin: 
@@ -119,11 +127,12 @@ Goto: http://localhost:5601/
 4. On Kibana-Dashboard:
 -----------------------
 	|-> Management -> Stack Management 
-	|					|-> Kibana -> Data Views -> Create data view
-    |                                                   |
-	|													|-> Name (Give it a name)
-	|													|-> Index pattern ( View from the right side & choose one which all showing as 'Data stream' )
-	|													|                      Copy (one as 'Data stream') and paste into Index pattern
-	|													|-> Click 'Save data view to kibana'
+	|			|-> Kibana -> Data Views -> Create data view
+    	|                                                   	|
+	|						    	|-> Name (Give it a name)
+	|						    	|-> Index pattern ( View from the right side & choose one which all showing as 'Data stream' )
+	|							|                      Copy (one as 'Data stream') and paste into Index pattern
+	|							|
+	|							|-> Click 'Save data view to kibana'
 	|
 	|-> Analytics -> Discover
