@@ -156,10 +156,12 @@ Note: Ignore the 1st step if already done in Elasticsearch
 3.Create Docker Container:
 --------------------------
 	1.Create a kibana.yml file with followings lines
-		________________________________________________________________________________________________
+		______________________________________________________________________________________________________________
 		server.host: "0.0.0.0"  # Allows access from any network interface
-		elasticsearch.hosts: ["http://host.docker.internal:9200"]  # URL of your Elasticsearch instance
-		------------------------------------------------------------------------------------------------
+		elasticsearch.hosts: ["http://host.docker.internal:9200"]  # URL of your Elasticsearch instance, in Windows OS
+		or
+		elasticsearch.hosts: ["http://<name of the elasticsearch container>:9200"] # In Ubuntu/Linux OS
+		--------------------------------------------------------------------------------------------------------------
 		
 	3.Attach this file with following Container-creation command
 		docker run --name kibana --net elastic 
