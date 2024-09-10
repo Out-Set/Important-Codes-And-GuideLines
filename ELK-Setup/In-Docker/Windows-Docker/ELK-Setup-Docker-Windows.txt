@@ -1,6 +1,17 @@
 ELK Setup: In Docker:
 +++++++++++++++++++++
 
+Note: Get inside into docker container
+---------------------------------------
+	docker exec -it <container_id_or_name> /bin/bash
+	
+Note: 
+-----
+Before starting setup, keep all the configs and yml files in a dir, also log-file
+----------------------------------------------------------------------------------
+  i.e.	Log file path: C:/Users/hp/Downloads/Intg-War-With-Dash/logs
+	Config file path: C:/Users/hp/Documents/ELK-in-Docker
+
 Elasticsearch:
 ==============
 Ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
@@ -15,17 +26,6 @@ Ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 
 3.Create Docker Container:
 --------------------------
-	For https protocol:
-	-------------------
-	-> leave everything as it is (do not create elasticsearch.yml)
-	-> docker run -d --name elasticsearch --net somenetwork -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" 
-	   docker.elastic.co/elasticsearch/elasticsearch:8.15.1
-	   
-		example: docker run -d --name elasticsearch --net elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" 
-			 docker.elastic.co/elasticsearch/elasticsearch:8.15.1
-   
-	For http protocol:
-	------------------
 	1.Create a elasticsearch.yml file with followings lines
         	_______________________________________________________________________________________
 		# Elasticsearch Props for localhost
@@ -41,7 +41,7 @@ Ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 		----------------------------------------------------------------------------------------
 		
 	2.Attach this file with following Container-creation command
-		docker run -d --name elasticsearch --net somenetwork -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" 
+		docker run -d --name <some-name> --net <network-created> -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" 
 		-v path/to/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml docker.elastic.co/elasticsearch/elasticsearch:8.15.1
 		
 			example: docker run -d --name elasticsearch --net elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" 
@@ -94,7 +94,7 @@ Ref: https://www.elastic.co/guide/en/logstash/current/docker.html
 		-----------------------------------------------------------------------------------------------------------------------------
 	
 	3.Attach these files with following Container-creation command, including your application log file too.
-		docker run --name logstash --net elastic 
+		docker run --name <some-name> --net <network-created>
 		-v path/to/logstash.conf:/usr/share/logstash/pipeline/logstash.conf # Mount the custom logstash.conf
 		-v "path/to/logs:/logs"  # Mount the app log file
 		-v path/to/logstash.yml:/usr/share/logstash/config/logstash.yml  # Mount the custom logstash.yml
@@ -158,13 +158,11 @@ Note: Ignore the 1st step if already done in Elasticsearch
 	1.Create a kibana.yml file with followings lines
 		______________________________________________________________________________________________________________
 		server.host: "0.0.0.0"  # Allows access from any network interface
-		elasticsearch.hosts: ["http://host.docker.internal:9200"]  # URL of your Elasticsearch instance, in Windows OS
-		or
-		elasticsearch.hosts: ["http://<name of the elasticsearch container>:9200"] # In Ubuntu/Linux OS
+		elasticsearch.hosts: ["http://host.docker.internal:9200"]  # URL of your Elasticsearch instance
 		--------------------------------------------------------------------------------------------------------------
 		
 	3.Attach this file with following Container-creation command
-		docker run --name kibana --net elastic 
+		docker run --name <some-name> --net <network-created> 
 		-v path/to/kibana.yml:/usr/share/kibana/config/kibana.yml 
 		-p 5601:5601 -d docker.elastic.co/kibana/kibana:8.15.1
 		
@@ -189,3 +187,9 @@ Goto: http://localhost:5601/
 	|							|-> Click 'Save data view to kibana'
 	|
 	|-> Analytics -> Discover
+
+
+
+
+
+
