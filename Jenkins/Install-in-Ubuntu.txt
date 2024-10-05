@@ -1,0 +1,31 @@
+jenkins:
+--------
+
+Long Term Support release:
+--------------------------
+A LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that time period. It can be installed from the debian-stable apt repository.
+
+$sudo wget -O /usr/share/keyrings/jenkins-keyring.asc  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+$echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+$sudo apt-get update
+$sudo apt-get install jenkins
+
+
+Start Jenkins:
+--------------
+You can enable the Jenkins service to start at boot with the command:: $sudo systemctl enable jenkins
+
+You can start the Jenkins service with the command:: $sudo systemctl start jenkins
+
+You can check the status of the Jenkins service using the command: $sudo systemctl status jenkins
+
+
+Go-to: http://localhost:8080/
+------------------------------
+Set the settings as you needed
+
+user: root
+pass: root
+
+Admin password: b8076707860c41c69260e8411b1cf014
+
