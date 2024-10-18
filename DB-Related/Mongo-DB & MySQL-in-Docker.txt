@@ -19,19 +19,16 @@ Mongo-DB in Docker:
 ===================
 docker pull mongo
 (MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD)
-docker run --name mongoDb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=your-password -d mongo
+docker run --name mongoDb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=<your-password> -d mongo
 
 Connection-String: mongodb://localhost:27017/
 
 Use-Mongo Shell:
 ----------------
 1.Start Mongo container: docker start mongoDb
-2.Open Mongo terminal: docker exec -it mongoDb bash
-3.Connect with Mongo by entering password: mongo -p
-4.Enter your password and use mongo.
+2.Open Mongo terminal: docker exec -it mongoDb mongosh -u admin -p <your-password
+3.Enter your password and use mongo.
 
-
-mongo -u "admin" -p "your-password" --authenticationDatabase "admin"
 
 
 
