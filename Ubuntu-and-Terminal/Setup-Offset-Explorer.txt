@@ -1,5 +1,7 @@
 Download: https://www.kafkatool.com/download.html
 
+Understand Kafka Structure: https://www.youtube.com/playlist?list=PLkz1SCf5iB4enAR00Z46JwY9GGkaS2NON
+
 Note: Works well with jdk-11
 
 1. Download jdk-11:
