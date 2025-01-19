@@ -1,0 +1,7 @@
+Merge Multiple Pdfs:
+--------------------
+pdfunite file1.pdf file2.pdf file3.pdf output.pdf
+
+All at Once:
+------------
+pdfunite *.pdf combined.pdf
