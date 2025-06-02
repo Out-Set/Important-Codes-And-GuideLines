@@ -1,0 +1,20 @@
+Run Vue.js Application on another port rather than default port:8080
+
+1.package.json:
+===============
+"scripts": {
+  "start": "vue-cli-service serve --port 8080"
+}
+
+now, start the application with command: npm run start
+
+
+2.While starting the application on terminal:
+=============================================
+specify the port number here
+----------------------------
+npm run serve -- --port 8080
+
+
+
+

@@ -1,0 +1,15 @@
+1. Find required api.jar
+------------------------
+i.e. If you have Apache Tomcat installed, it’s usually located under: <TOMCAT_HOME>/lib/servlet-api.jar
+
+2. Compile with classpath
+-------------------------
+Use the -cp (or -classpath) option to include the JAR file: javac -cp "<path-to>/servlet-api.jar" FirstServlet.java
+
+Example: 
+javac -cp "/home/savan/Downloads/apache-tomcat-9.0.105/lib/servlet-api.jar" FirstServlet.java
+
+Note: On Windows, use ; instead of : as path separator:
+javac -cp "C:\apache-tomcat\lib\servlet-api.jar" FirstServlet.java
+
+
