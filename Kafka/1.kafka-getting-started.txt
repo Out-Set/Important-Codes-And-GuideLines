@@ -1,5 +1,13 @@
 Kafka:
 ------
+Kafka 0.8 -> 2.x :: ZooKeeper required
+Kafka 3.0 -> 3.3 :: ZooKeeper required (KRaft optional, NOT production ready)
+Kafka 3.4 -> 3.9 :: Both ZooKeeper and KRaft supported (KRaft stable)
+Kafka 4.0+ :: ZooKeeper removed - KRaft mandatory
+
+You can use ZooKeeper until Kafka 3.9.x
+Starting from 4.0 only KRaft mode is supported -- no more ZooKeeper.
+
 Download Kafka binary then extarct it: https://kafka.apache.org/downloads
 
 Start Zookeeper Server: ./bin/zookeeper-server-start.sh ./config/zookeeper.properties
