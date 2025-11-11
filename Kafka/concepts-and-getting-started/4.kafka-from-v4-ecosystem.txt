@@ -343,14 +343,14 @@ See image: producer-and-consumer-connects-to-broker.png
             +--------------------+
             |   Controller Node  |
             +--------------------+
-                     	▲
+                ^
              	│ (Cluster metadata)
-                 	▼
+                V
 +-------------------+       +-------------------+       +-------------------+
 |     Broker 1      | <-->  |     Broker 2      | <-->  |     Broker 3      |
 | (Leader topicA-0) |       | (Leader topicA-1) |       | (Leader topicA-2) |
 +-------------------+       +-------------------+       +-------------------+
-	▲   ▲			          ▲  ▲                                           ▲
+        ^  ^                          ^  ^                          ^
      	│  │                          │  │                          │
      	│  │                          │  │                          │
       PRODUCER -> ------------- -> Sends to leader partition
