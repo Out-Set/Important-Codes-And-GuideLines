@@ -5,6 +5,10 @@ Kafka 3.0 -> 3.3 :: ZooKeeper required (KRaft optional, NOT production ready)
 Kafka 3.4 -> 3.9 :: Both ZooKeeper and KRaft supported (KRaft stable)
 Kafka 4.0+ :: ZooKeeper removed - KRaft mandatory
 
+Documentation: https://kafka.apache.org/documentation/
+
+Note:
+-----
 You can use ZooKeeper until Kafka 3.9.x
 Starting from 4.0 only KRaft mode is supported -- no more ZooKeeper.
 
