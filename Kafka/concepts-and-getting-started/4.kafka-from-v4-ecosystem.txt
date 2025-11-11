@@ -10,6 +10,8 @@ _______________________________________________________
 | kAFKA - 4.0+ :: ZooKeeper removed - KRaft mandatory |
 -------------------------------------------------------
 
+See image: kafka-before-v4-and-after-v4.png
+
 Single-node (Standalone):
 =========================
 1. Check your log directory path: grep log.dirs ./config/server.properties

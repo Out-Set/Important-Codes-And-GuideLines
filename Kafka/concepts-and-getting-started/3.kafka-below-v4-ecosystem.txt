@@ -10,7 +10,7 @@ ______________________
 | kAFKA - Before 4.0 |
 ----------------------
 
-See image: 2.kafka-ecosystem.png
+See image: kafka-ecosystem.png
 
 Kafka-Ecosystem:
 ================
@@ -59,7 +59,7 @@ Note: The partitions test-1/test-0/test-2 may be in different kafka-logs-01/kafk
 
 Topic with replication factor:
 ==============================
-See image: 3.topic-with-replication-factor-1.png & 3.topic-with-replication-factor-2.png
+See image: topic-with-replication-factor-1.png & topic-with-replication-factor-2.png
 Note: When no replication factor is defined: by default it is 1.
 
 Create topic: ./bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic new-test --partitions 2 --replication-factor 2
@@ -105,8 +105,8 @@ Error while executing topic command : Replication factor: 4 larger than availabl
 [2025-11-06 02:48:59,312] ERROR org.apache.kafka.common.errors.InvalidReplicationFactorException: Replication factor: 4 larger than available brokers: 3.
  (kafka.admin.TopicCommand$)
 
-Note: (see image: 4.leader-and-replica.png)
--------------------------------------------
+Note: (see image: leader-and-replica.png)
+-----------------------------------------
 There is no need to have leader and replica on the same broker (server) bcoz if it is down we will not have access to the messages.
 So leader and replica must be on the different broker (server).
 
