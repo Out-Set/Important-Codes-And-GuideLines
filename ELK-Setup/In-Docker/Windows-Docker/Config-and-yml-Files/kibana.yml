@@ -1,3 +1,0 @@
-
-server.host: "0.0.0.0"  # Allows access from any network interface
-elasticsearch.hosts: ["http://host.docker.internal:9200"]  # URL of your Elasticsearch instance

@@ -1,0 +1,17 @@
+Step 1: Find the Disk
+	$ lsblk
+	
+Step 2: Format the Disk
+	1.ext4 (Linux filesystem):
+		$ sudo mkfs.ext4 /dev/sdX
+		
+	2.ntfs (Windows-compatible filesystem):
+		$ sudo mkfs.ntfs /dev/sdX
+	
+	3.FAT32 (cross-compatible for Linux, macOS, Windows):
+		$ sudo mkfs.vfat -F 32 /dev/sdX
+		
+Step 3: Confirm Formatting
+	$ lsblk -f
+
+That's it! The disk is formatted and ready for use.

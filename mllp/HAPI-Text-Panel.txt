@@ -1,0 +1,32 @@
+For mllp message broadcast
+
+HAPI Text Panel:
+----------------
+Download HAPI: https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html
+
+Since it requires jre 1.6: jre-6u45-windows-x64.exe
+Download jre 1.6: https://www.oracle.com/in/java/technologies/javase-java-archive-javase6-downloads.html
+
+
+Run HAPI in cmd: 
+testpanel.exe -j C:\Program Files\Java\jre6\bin\java.exe
+
+
+Kafka:
+------
+For windows:
+Open path in the cmd: kafka_2.12-2.8.1\bin\windows>
+1. Start zookeeper server: zookeeper-server-start.bat ..\..\config\zookeeper.properties
+2. Start kafka server: kafka-server-start.bat ..\..\config\server.properties
+3. Create a topic: kafka-topics.bat --create --topic <topic-name> --bootstrap-server localhost:9092
+4. Start producer console: kafka-console-producer.bat --topic <topic-name> --bootstrap-server localhost:9092
+5. Start consumer console: kafka-console-consumer.bat --topic <topic-name> --bootstrap-server localhost:9092
+
+
+For linux:
+Open path in the cmd: kafka_2.12-2.8.1\bin>
+1. Start zookeeper server: zookeeper-server-start.sh ../config/zookeeper.properties
+2. Start kafka server: kafka-server-start.sh ../config/server.properties
+3. Create a topic: kafka-topics.sh --create --topic <topic-name> --bootstrap-server localhost:9092
+4. Start producer console: kafka-console-producer.sh --topic <topic-name> --bootstrap-server localhost:9092
+5. Start consumer console: kafka-console-consumer.sh --topic <topic-name> --bootstrap-server localhost:9092

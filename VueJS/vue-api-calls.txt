@@ -1,0 +1,192 @@
+<template>
+  <div>
+    <button @click="getUserList()" class="btn btn-primary btn-sm">GET-API :: GET-USER-LIST</button><br><br>
+  </div>
+  <div>
+    <button @click="getPan()" class="btn btn-primary btn-sm">POST-API :: VERIFY-PAN</button><br><br>
+  </div>
+  <div>
+    <button @click="getCibilData()" class="btn btn-primary btn-sm">GET-API :: GET-CIBIL-DATA-FROM-DB</button><br><br>
+  </div>
+  <div>
+    <button @click="getLogs()" class="btn btn-primary btn-sm">GET-API :: GET-LOGS</button><br><br>
+  </div>
+  <div>
+    <button @click="createWorkorder()" class="btn btn-primary btn-sm">POST-API :: CREATE-WORKORDER</button><br><br>
+  </div>
+  <div>
+    <button @click="getUserInfo()" class="btn btn-primary btn-sm">GET USER INFO :: APIFLOW</button><br><br>
+  </div>
+
+  <div>
+    <button @click="getCsvReport()" class="btn btn-primary btn-sm">GET CSV REPORT</button><br><br>
+  </div>
+  <div>
+    <button @click="getExcelReport()" class="btn btn-primary btn-sm">GET EXCEL REPORT</button><br><br>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  },
+  data() {
+    return {
+      // baseUrl: "https://api.uatfinfinity.in/BitsFlow-App", //https://api.uatfinfinity.in/BitsFlow-App/rest
+      baseUrl: "http://localhost:8081/BitsFlow-App",
+
+      headers: {
+        // 'TENANT_CODE': 'FINFINITY',
+        'TENANT_CODE': 'APIFLOW',
+        'TRANSACTION_REFERENCE_ID': '+iNwNYbmuGGU9Q5yWPjIRg==',
+        'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJUd3hRUHZ3MFBYSVJfTlp6QzlWUXgwcWNhV2o0MFA1TnRmSmlNOGlrOWVZIn0.eyJleHAiOjE3NjI5NzU5NDYsImlhdCI6MTc2MjkzMjc0NiwianRpIjoib25ydHJvOmI5ZDVkMGVkLTBhNTMtNDI2OC05MDIwLTVmMjMzOTFlMWI1MSIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODg4OC9yZWFsbXMvQml0c0Zsb3ciLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsIkFQSUZMT1ciLCJicm9rZXIiLCJhY2NvdW50Il0sInN1YiI6ImY4OTBhOTg3LTllM2UtNGQ2MC04YzkwLWY3NjkxOTkxMzRiMiIsInR5cCI6IkJlYXJlciIsImF6cCI6IkZJTkZJTklUWSIsInNpZCI6ImMwNzM3ZTRlLTM5ZGItNGZmNC1hOTllLTAwYjliNjNkYTQ5NiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiRklORklOSVRZIiwiQVBJRkxPVyIsIm9mZmxpbmVfYWNjZXNzIiwiQURNSU4iLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtYml0c2Zsb3ciXX0sInJlc291cmNlX2FjY2VzcyI6eyJGSU5GSU5JVFkiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sInJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJyZWFsbS1hZG1pbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiQVBJRkxPVyI6eyJyb2xlcyI6WyJ1bWFfcHJvdGVjdGlvbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsInZpZXctZ3JvdXBzIiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJkZWxldGUtYWNjb3VudCIsIm1hbmFnZS1jb25zZW50Iiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJzYXZhbiBwcmFqYXBhdGkiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYXZhbiIsImdpdmVuX25hbWUiOiJzYXZhbiIsImZhbWlseV9uYW1lIjoicHJhamFwYXRpIiwiZW1haWwiOiJzYXZhbi5wcmFqYXBhdGlAYml0c2Zsb3d0ZWNoLmNvbSJ9.QRx8hQ8V2-o3bcaY_qv6w8PaMnucdHni_t9BtSZ4m8AqIw87q-PIOWNvQl767HGG__yxwe7gLFJQgj2UWr3zbEp_3m4rpfdi4HPyKkIiX5rwanAaEQ6qJ6vkNsP-teVpIei0EsU27crU9kokvnHzz-Dq1Pasdfh7_V3yush8tJOlXN3MJqeQfEqXBwBCto2HLp_QNyxOo1_oAvaPkHReAf92HIsrvllxFKS2BhFxY3UsoFp8l4tmxZEea-Ev_neQpHEckFUeU_rel6s3xpDJ4-n32jPJ9CZlaFIKs8F8mOYx81iDyjiG96ZQoQLYPGkuKEwQvmzftQ9tGCF2UsELOQ'
+      },
+
+    }
+  },
+
+  methods: {
+
+    getCsvReport() {
+      axios.get(this.baseUrl + "/audit-report/generate?reportType=csv&fromDate=2025-08-11&toDate=2025-11-12&serviceIdentifierId=47")
+        .then((response) => {
+          console.log("Response from Backend: ", response);
+          // Process response if needed
+        })
+        .catch((error) => {
+          console.error("Error occurred!", error);
+          // Handle error here
+        });
+    },
+
+    getExcelReport() {
+      axios.get(this.baseUrl + "/audit-report/generate?reportType=excel&fromDate=2025-08-11&toDate=2025-11-12&serviceIdentifierId=47")
+        .then((response) => {
+          console.log("Response from Backend: ", response);
+          // Process response if needed
+        })
+        .catch((error) => {
+          console.error("Error occurred!", error);
+          // Handle error here
+        });
+    },
+
+    getUserInfo() {
+
+      let headers = {
+        'TENANT_CODE': 'FINFINITY',
+        'TRANSACTION_REFERENCE_ID': 'OZZKyO0aESNcU5IO+nX6nw==',
+        'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5c'
+      };
+
+      axios.get("http://localhost:8081/BitsFlow-App/keycloak/get/user-info", { headers: headers })
+        .then((response) => {
+          console.log("Response form Backend: ", response);
+        })
+        .catch((error) => {
+          // Handle the error
+          console.log("Error Occured!", error);
+        })
+    },
+
+    getUserList() {
+
+      let headers = {
+        'TENANT_CODE': 'FINFINITY',
+        'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoaTFZeG4zMUc5WjMxQXFuVUh3UDJtQnBnQ084NFp4WDI4TVlPQTlILVVnIn0.eyJleHAiOjE3MzY5NDE5MjcsImlhdCI6MTczNjkzNDcyNywianRpIjoiOTYxZTliNGYtMzE4Mi00MGJlLTg4MWYtMzQ3Y2E5ZTA1YjFmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9CaXRzRmxvdyIsImF1ZCI6WyJyZWFsbS1tYW5hZ2VtZW50IiwiYnJva2VyIiwiYWNjb3VudCJdLCJzdWIiOiI5Nzc3Zjg2YS01Yzg2LTQ5ZTAtODI3YS1mYTBjMjYxMTYyZmQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJGSU5GSU5JVFkiLCJzaWQiOiI2ZmU5MTg3Zi1jNGI4LTQ2NjQtYjk1OS0yZjU3MmVmNmFiNmEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkZJTkZJTklUWSIsIlRBUlRBTl9LWUNfUEFOX1ZFUklGSUNBVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsImRlZmF1bHQtcm9sZXMtYml0c2Zsb3ciXX0sInJlc291cmNlX2FjY2VzcyI6eyJGSU5GSU5JVFkiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sInJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJyZWFsbS1hZG1pbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsInZpZXctZ3JvdXBzIiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJtYW5hZ2UtY29uc2VudCIsImRlbGV0ZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJzYXZhbiBrdW1hciIsInByZWZlcnJlZF91c2VybmFtZSI6InNhdmFuIiwiZ2l2ZW5fbmFtZSI6InNhdmFuIiwiZmFtaWx5X25hbWUiOiJrdW1hciIsImVtYWlsIjoiYWRtaW5AaW50Zy5jb20ifQ.mfCRSbtdC-wD9CFVRy_7XyhDSCgmKJBgWfUZ0SaYcUIBWaizOsBOF7MlAmRgMyY5jjo6SxXDsDJIEoB3U69-1ljtWjw_pVaH0yGa5JXpxD5R83h5xx8utaJCbroJ2SO_YByZqknw8Jk1LkvGPxdGzB2YidomL8RTtYMCOuBwGnBd6E6e12lyOhH5iJDneWSet79toXo1ZCpCIwX6djyTfydDYwZJQOBtojsAtCpzaKmxjwRiGuOiL9SEeAkvw85c0Wbf_ef3UpojhpU1bzr0rgNTGNtVcL_dUNukVnH-XJlutaxA4KcCj-gL8ape2KZpCAgCNbRVW5TgdmyfMW3Byg'
+      };
+
+      axios.get(this.baseUrl + "/keycloak/users", { headers: headers })
+        .then((response) => {
+          console.log("Response form Backend: ", response);
+        })
+        .catch((error) => {
+          // Handle the error
+          console.log("Error Occured!", error);
+        })
+    },
+
+    createWorkorder() {
+
+      let headers = {
+        'TENANT_CODE': 'FINFINITY',
+        'TRANSACTION_REFERENCE_ID': 'OZZKyO0aESNcU5IO+nX6nw==',
+        'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoaTFZeG4zMUc5WjMxQXFuVUh3UDJtQnBnQ084NFp4WDI4TVlPQTlILVVnIn0.eyJleHAiOjE3MzY4NTczMTgsImlhdCI6MTczNjg1MDExOCwianRpIjoiOGE1ODhiZTktZjVhZi00NzhmLTk1ZjctYzEwYTAyNjc4OWZlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9CaXRzRmxvdyIsImF1ZCI6WyJyZWFsbS1tYW5hZ2VtZW50IiwiYnJva2VyIiwiYWNjb3VudCJdLCJzdWIiOiI5Nzc3Zjg2YS01Yzg2LTQ5ZTAtODI3YS1mYTBjMjYxMTYyZmQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJGSU5GSU5JVFkiLCJzaWQiOiJhMWU4ZDA1My1jNzU2LTQ5YTItOTUwZC1lY2ExN2Y3MzhlZGIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkZJTkZJTklUWSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsImRlZmF1bHQtcm9sZXMtYml0c2Zsb3ciXX0sInJlc291cmNlX2FjY2VzcyI6eyJGSU5GSU5JVFkiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sInJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJyZWFsbS1hZG1pbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsInZpZXctZ3JvdXBzIiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJtYW5hZ2UtY29uc2VudCIsImRlbGV0ZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJzYXZhbiBrdW1hciIsInByZWZlcnJlZF91c2VybmFtZSI6InNhdmFuIiwiZ2l2ZW5fbmFtZSI6InNhdmFuIiwiZmFtaWx5X25hbWUiOiJrdW1hciIsImVtYWlsIjoiYWRtaW5AaW50Zy5jb20ifQ.RS2iJof2oY79G3sCf9uLOvAGsmZKgF8mC00TqMBTo9WtwsJxbTuRzr7Y1lZqZMIAH2GU9HabDdn03zg0VtVg5Qy0sBdA1IPhldj4BvFJwZ8TWOegNX-__u_BGM2s1jAGtDz_Iu451dDddqRA2hUDEuJXhh5qORw27eKIODyUJVR5_tCv36mM_q3SuOC9nj64Tnj7bOx9yncsBi2cHmk6r4XCnM3rykEqzh5At_IZKGuBvd5PahrSYl-5HXWxG16wpUQ_Lu--l3U1MdRvNpq6Ksbgk7u6uvZK4okyYNarK_YCSPDWv2R8xaNrW65CWm8duTrG-iG3asYNIqfXXB3E5A'
+      };
+
+
+
+      let requestData = {
+        "reportType": "payslip",
+        "extraParams": "",
+        "sync": ""
+      };
+
+      axios.post(this.baseUrl + "/rest/create/workorder", requestData, { headers: headers })
+        .then((response) => {
+          console.log("Response form Backend: ", response);
+        })
+        .catch((error) => {
+          // Handle the error
+          console.log("Error Occured!", error);
+        })
+    },
+
+    getPan() {
+
+      let headers = {
+        'TENANT_CODE': 'FINFINITY',
+        'TRANSACTION_REFERENCE_ID': 'OZZKyO0aESNcU5IO+nX6nw==',
+        // 'access-token': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJTZ3JRWXVXcEctbFBCYktqV2JLMFVHeXdvMHEtVVdLdi05WkJVWmtYUm5FIn0.eyJleHAiOjE3NTMyNjgwMDMsImlhdCI6MTc1MzI1NzIwMywianRpIjoib25ydHJvOjc4Yjg5NTc4LTkwMmUtNGVlMS1hN2Y4LWIzOTVhZDI2MTQwZCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4NS9yZWFsbXMvQml0c0Zsb3ciLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiM2NmMjY3NjgtYTljMC00ZWM0LThlZWEtMTJkOGVmNDJmOGI0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiQVBJRkxPVyIsInNpZCI6IjkyMWEzZWJkLTRjODktNDc4NS1iYWJmLWJjZjNiMDE3Yzg5NyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtYml0c2Zsb3ciXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkpvaG4gRG9lIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiam9obmRvZSIsImdpdmVuX25hbWUiOiJKb2huIiwiZmFtaWx5X25hbWUiOiJEb2UiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20ifQ.H8JworpjZaLakvQoksDQD8Z_PeujF2TsEbc_VxVRyakNGYiDKnHDHv0i2_hzFYREDLx3ETKoWBz3a6TdI3r__Sbj8NPeyEoT2EbwtrfAvofuwaboMjVmHVDYnuLTJL5fqvrv75oWiN-fMBUs9OKVPzpUDHS19_cwhRF-O_635tOw1Wa9k3LvBKqBhmsDbDWvU_qkZ8QHKhZW7-hUO1SizC-X2amxBSiJQzOUFG5Pd2TVYwmO_2XtjvU36UXKbzmfmp_Vuv2X6Y_6OOrYxgs5ZA0ekPjEPE2SKC4I40iu5QkeqgcvkybF1EaFMu6Rck3rN28ME9lYWtSnlfG44ynG5Q',
+        'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJlYS1pdkhOZkpqQklqZXFqdHJ6LTJ0QUJ0dmRMaW1IMlV4VnpveHRwbkFNIn0.eyJleHAiOjE3OTE0NDYzMDQsImlhdCI6MTc2MDM0MjMwNCwianRpIjoiNzU4ZTNhN2UtYmM5Yi00ZDc1LWE5MDEtNmQzZjM5ZDViMjEwIiwiaXNzIjoiaHR0cHM6Ly9rYy51YXRmaW5maW5pdHkuaW4vcmVhbG1zL0JpdHNGbG93IiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJicm9rZXIiLCJhY2NvdW50Il0sInN1YiI6IjYxNDQ1NmY4LTg0ODUtNGUxOC1hZTU5LWZlNjU1YzZkOTNkMiIsInR5cCI6IkJlYXJlciIsImF6cCI6IkZJTkZJTklUWSIsInNpZCI6ImJmYTY0MjBmLTk2YjItNDBlMS04Mzg5LTk5NmU3NzMyZWFkZCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiRklORklOSVRZIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIkFETUlOIiwiZGVmYXVsdC1yb2xlcy1iaXRzZmxvdyJdfSwicmVzb3VyY2VfYWNjZXNzIjp7IkZJTkZJTklUWSI6eyJyb2xlcyI6WyJ1bWFfcHJvdGVjdGlvbiJdfSwicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJicm9rZXIiOnsicm9sZXMiOlsicmVhZC10b2tlbiJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctYXBwbGljYXRpb25zIiwidmlldy1jb25zZW50Iiwidmlldy1ncm91cHMiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsIm1hbmFnZS1jb25zZW50IiwiZGVsZXRlLWFjY291bnQiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6ImFwaWZsb3cgYWRtaW4iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhcGlsZmxvd19hZG1pbiIsImdpdmVuX25hbWUiOiJhcGlmbG93IiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYXBpZmxvd0BiaXRzZmxvd3RlY2guY29tIn0.U2HE_vHymysjfRgujNrfVr-1t29QI7w3zUrCxu5dvP0zlYlO8Nr9g5Sy6exEoinVzFQODNqs2LdabsV7HZ9U5fFh2K0BDOMF3sdKPBxJrTYra8Qbg5PHjkmH43MxKg0UZ93vHMOsExDGN8qlMkKn1N3JNls-CKe3Z2g0xpWd2XYL7iRhaO6UOVcN2IOsDOZTt5fjNgOyIsXUCL4BKtqi0xtObZv4VlHVIyT9nvb5yPQqqBCZEztr0iKvBTuMgfyrjse0QOB7U1DgFpHneE5xYAfvb7vgnl5XgkzomkuWmonKX29sc4bdhnjXBnJhI4X1Ar6zsy5_LzpAnX74x1R9rg',
+      };
+
+      let requestData = {
+        "category": "individual-pii-data",
+        "type": "pan-detail-v2",
+        "applicationId": "Dashboard-realtime-KYC",
+        "data": {
+          "panNumber": "OZZKyO0aESNcU5IO+nX6nw=="
+        },
+        "mode": "TEST"
+      };
+
+      axios.post(this.baseUrl + "/rest/pan/verification", requestData, { headers: headers })
+        .then((response) => {
+          console.log("Response form Backend: ", response);
+        })
+        .catch((error) => {
+          // Handle the error
+          console.log("Error Occured!", error);
+        })
+    },
+
+
+    getCibilData() {
+      axios.get(this.baseUrl + "/rest/cibil/db-data/get", { headers: this.headers })
+        .then((response) => {
+          console.log("Response from Backend: ", response);
+          // Process response if needed
+        })
+        .catch((error) => {
+          console.error("Error occurred!", error);
+          // Handle error here
+        });
+    },
+
+    getLogs() {
+      axios.get(this.baseUrl + "/api/logs/yearApiData/LOCAL?year=2024&month=7")
+        .then((response) => {
+          console.log("Response form Backend: ", response);
+        })
+        .catch((error) => {
+          // Handle the error
+          console.log("Error Occured!", error);
+        })
+    }
+  }
+}
+</script>

@@ -1,3 +1,0 @@
-Command: java -jar -Dserver.port=your_port your-application.war
-
-i.e. java -jar -Dserver.port=8081 integration-web-0.0.1-SNAPSHOT.war
