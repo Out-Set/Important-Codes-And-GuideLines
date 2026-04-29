@@ -1,0 +1,35 @@
+
+System-Design:
+==============
+https://www.eraser.io/decision-node
+System-design-interview: https://bytebytego.com/courses/system-design-interview
+
+1. Fan-out architecture (pub-sub): https://medium.com/aws-lambda-serverless-developer-guide-with-hands/publish-subscribe-fan-out-pattern-in-serverless-architectures-using-sns-sqs-and-lambda-bccaa3abac9e
+2. Rate-limiting: https://www.eraser.io/decision-node/api-rate-limiting-strategies-token-bucket-vs-leaky-bucket
+3. Container-orchestration: https://aws.amazon.com/what-is/container-orchestration/
+4: Google borg: cluster management service
+5: Event-sourcing: https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/
+6: CQRS (Command Query Responsibility Segregation): https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs
+7: Back-of-the-envelope-estimation: https://bytebytego.com/courses/system-design-interview/back-of-the-envelope-estimation
+8: Rate-limiting: token-bucket and leaky-bucket
+9: Design-consistent-hashing: https://bytebytego.com/courses/system-design-interview/design-consistent-hashing
+10: Adaptive-bitrate-streaming: https://imagekit.io/docs/adaptive-bitrate-streaming
+11: UPI: https://razorpay.com/blog/what-is-upi-and-how-it-works/
+12: Web-Confrence (i.e.zoom,teams): https://getstream.io/blog/what-is-a-selective-forwarding-unit-in-webrtc/
+	mediasoup: https://mediasoup.org/
+13: Notification-systen-design: Event-driven (fan-out architecture)
+
+
+PKCE (proof key for code exchange) in oauth2.0: https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce
+Websockets vs Short-Polling & Long-Polling vs SSE (server sent events)
+
+Relationship based access control (ReBAC)
+Google's Zanzibar and OpenFGA: https://research.google/pubs/zanzibar-googles-consistent-global-authorization-system/
+
+
+Find a new free domain: https://www.freenom.com/en/index.html
+How to Expose Local Host using Cloudflare Tunnels: https://www.youtube.com/watch?v=BnWfbv7Fy-k
+
+Server Monitoring with Grafana Prometheus and Loki: https://www.youtube.com/watch?v=ddZjhv66o_o
+
+
