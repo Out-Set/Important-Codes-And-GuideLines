@@ -1,0 +1,36 @@
+You can follow the different ways in order to improve the latency/performance of application:
+---------------------------------------------------------------------------------------------
+ 1. Always do upload and download in chunks (process each chunks in parallel asynchronously) to improve speed.
+ 2. Do indexing on the meta-data-table, to improve search speed.
+ 
+ 3. For Preview (way-1): Go with pre-generation preview
+	File uploaded -> Kafka event (or any asynchronous functionality) -> background job generates thumbnail -> stored in Redis
+  	User requests preview → Redis returns thumbnail → 0.something ms
+	Note: This (Pre-generation preview) work happens BEFORE the user asks for it.
+				OR
+    For Preview (way-2): HTTP Range Requests (Bcoz you don't need the whole file to show a preview)
+	PDF preview  -> only need first 100KB (first page render)
+	Video player -> only need first 2MB to start playing
+	Image thumb  -> only need resized version
+
+	How it Works: Range Request
+  		Client says:  "Give me bytes 0 to 999 of file XYZ"
+  			i.e. curl -H "Range: bytes=0-999" https://example.com/file.pdf
+  		Server says:  "Here's just that slice" (206 Partial Content)
+	*Result: Preview loads in milliseconds, not minutes
+	
+ 4. For Download: Every request checks layers from fastest to slowest as below.
+	L1 — In-process (Caffeine)    0.05ms   <- lives inside your app 
+	L2 — Redis                    0.5ms    <- lives on same network		(If not found thorugh L1)
+	L3 — CDN Edge                 5ms      <- lives near the user		(If not found thorugh L2)
+	L4 — Database + Storage       50ms+    <- the actual source     	(If not found thorugh L3)
+
+    Note: About 90% of requests should be answered by L1 or L2. Only rare/cold files should ever reach L4.
+   
+   				OR
+    With presigned URLs: If using any storage systems (i.e. S3, MinIO ...)
+  	1. User asks your server: "I want to download file XYZ"
+  	2. Your server generates a temporary URL to MinIO/S3
+  	3. User downloads DIRECTLY from MinIO/S3
+  	(Now your server handles only a tiny auth request = no bottleneck)
+
