@@ -1,0 +1,13 @@
+Maintain Image Size in Linux:
+=============================
+
+sudo apt update
+sudo apt install imagemagick
+
+
+1. Compress the image: $ convert input.jpg -quality 70 output.jpg
+2. Resize dimensions: $ convert input.jpg -resize 1920x1080 -quality 70 output.jpg
+3. Iterative compression: $ convert input.jpg -define jpeg:extent=300KB output.jpg
+
+
+
